@@ -9,5 +9,12 @@
   "action": {
     "default_title": "click me",
     "default_popup": "popup.html"
-  }
+  },
+  "background": {
+    "service_worker": "background.js"
+  },
+  "permissions": ["tabs", "bookmarks"],
+  "content_scripts": [
+    { "matches": ["https://*.google.com/*"], "js": ["contentScript.js"] }
+  ]
 }

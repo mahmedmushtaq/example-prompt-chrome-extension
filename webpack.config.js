@@ -9,6 +9,9 @@ module.exports = {
   devtool: "cheap-module-source-map",
   entry: {
     popup: path.resolve("./src/popup/index.tsx"),
+    options: path.resolve("./src/options/index.tsx"),
+    background: path.resolve("./src/background/index.ts"),
+    contentScript: path.resolve("./src/contentScript/index.ts"),
   },
   module: {
     rules: [
@@ -40,11 +43,7 @@ module.exports = {
         },
       ],
     }),
-    new HtmlPlugin({
-      title: "React JS boilerplate",
-      filename: "popup.html",
-      chunks: ["popup"],
-    }),
+    ...getHtmlPlugins(["popup", "options"]),
   ],
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
@@ -52,4 +51,21 @@ module.exports = {
   output: {
     filename: "[name].js",
   },
+  optimization: {
+    splitChunks: {
+      // include all types of chunks
+      chunks: "all",
+    },
+  },
 };
+
+function getHtmlPlugins(chunks) {
+  return chunks.map(
+    (chunk) =>
+      new HtmlPlugin({
+        title: "React Extension",
+        filename: `${chunk}.html`,
+        chunks: [chunk],
+      })
+  );
+}
