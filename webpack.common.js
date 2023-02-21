@@ -5,17 +5,20 @@ const tailwindcss = require("tailwindcss");
 const autoprefixer = require("autoprefixer");
 
 module.exports = {
-  mode: "development",
-  devtool: "cheap-module-source-map",
   entry: {
-    popup: path.resolve("./src/popup/index.tsx"),
-    options: path.resolve("./src/options/index.tsx"),
+    main: path.resolve("./src/Main/index.tsx"),
     background: path.resolve("./src/background/index.ts"),
-    contentScript: path.resolve("./src/contentScript/index.ts"),
+    contentScript: path.resolve("./src/contentScript/index.tsx"),
+    firebaseConfig: path.resolve("./src/firebase/firebaseConfig.ts"),
+    categories: path.resolve("./src/firebase/db/categories.ts"),
+    firebaseAbstractFile: path.resolve(
+      "./src/firebase/db/firebaseAbstractFile.ts"
+    ),
+    prompt: path.resolve("./src/firebase/db/prompt.ts"),
   },
   module: {
     rules: [
-      { use: "ts-loader", test: /\.tsx$/, exclude: /node_modules/ },
+      { use: "ts-loader", test: [/\.tsx$/, /\.ts$/], exclude: /node_modules/ },
       {
         use: [
           "style-loader",
@@ -43,7 +46,7 @@ module.exports = {
         },
       ],
     }),
-    ...getHtmlPlugins(["popup", "options"]),
+    ...getHtmlPlugins(["main"]),
   ],
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
@@ -51,12 +54,13 @@ module.exports = {
   output: {
     filename: "[name].js",
   },
-  optimization: {
-    splitChunks: {
-      // include all types of chunks
-      chunks: "all",
-    },
-  },
+  
+  // optimization: {
+  //   splitChunks: {
+  //     // include all types of chunks
+  //     chunks: "all",
+  //   },
+  // },
 };
 
 function getHtmlPlugins(chunks) {

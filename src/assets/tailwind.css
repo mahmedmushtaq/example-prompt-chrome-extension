@@ -1,8 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Lexend&family=Montserrat&display=swap");
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-body{
-    width: 400px;
-    height: 400px;
+body {
+  min-width: 300px;
+  min-height: 150px;
 }

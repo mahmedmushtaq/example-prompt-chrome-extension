@@ -4,17 +4,19 @@
   "version": "1.0.0",
   "description": "This extension will help you to generate command without writing it explicitly",
   "icons": {
-    "16": "icon.png"
+    "16": "icon.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
   },
   "action": {
     "default_title": "click me",
-    "default_popup": "popup.html"
+    "default_popup": "main.html"
   },
   "background": {
     "service_worker": "background.js"
   },
   "permissions": ["tabs", "bookmarks"],
   "content_scripts": [
-    { "matches": ["https://*.google.com/*"], "js": ["contentScript.js"] }
+    { "matches": ["https://chat.openai.com/*"], "js": ["contentScript.js"] }
   ]
 }

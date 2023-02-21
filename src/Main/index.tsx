@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import Popup from "./Popup";
+import Main from "./Main";
 import "../assets/tailwind.css";
 
 function init() {
@@ -11,7 +11,7 @@ function init() {
   }
   const root = createRoot(appContainer);
   console.log(appContainer);
-  root.render(<Popup />);
+  root.render(<Main />);
 }
 
 init();
