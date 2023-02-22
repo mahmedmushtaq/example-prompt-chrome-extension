@@ -17,7 +17,7 @@ const ContentScript = () => {
     if (!skipGptEnableChecking) {
       const val = await isChatGptExtensionEnabled();
 
-      if (!val) {
+      if (typeof val !== "undefined" && !val) {
         console.log("chatgpt extension is disabled");
         return;
       }
@@ -39,8 +39,10 @@ const ContentScript = () => {
     const val = STORAGE_KEYS.enableChatGptExtension;
     chrome.storage.onChanged.addListener(async (changes, namespace) => {
       for (let [val, { oldValue, newValue }] of Object.entries(changes)) {
-        if (newValue) await loadCategories();
-        else setCategories([]);
+        if (typeof newValue !== "undefined") {
+          if (newValue) await loadCategories();
+          else setCategories([]);
+        }
       }
     });
   }, []);

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { STORAGE_KEYS } from "../globals/constants";
 import {
   isChatGptExtensionEnabled,
   setChatGptExtensionEnableStatus,
@@ -12,7 +11,7 @@ const Popup = () => {
     (async () => {
       const val = await isChatGptExtensionEnabled();
 
-      setEnable(val);
+      if (typeof val !== "undefined") setEnable(val);
     })();
   }, []);
 

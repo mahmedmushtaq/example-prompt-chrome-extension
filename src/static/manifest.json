@@ -1,8 +1,8 @@
 {
   "manifest_version": 3,
-  "name": "ChatGpt Example Prompts",
-  "version": "1.0.0",
-  "description": "This extension will help you to generate command without writing it explicitly",
+  "name": "ChatGpt prompts - by exampleprompts.com",
+  "version": "1.0.1",
+  "description": "This extension will help you to generate prompt without writing it explicitly",
   "icons": {
     "16": "icon.png",
     "48": "icon_48.png",
@@ -15,7 +15,7 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["tabs", "bookmarks", "storage"],
+  "permissions": ["storage"],
   "content_scripts": [
     { "matches": ["https://chat.openai.com/*"], "js": ["contentScript.js"] }
   ]

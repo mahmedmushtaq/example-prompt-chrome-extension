@@ -7,7 +7,7 @@
     "dev": "webpack",
     "rmDist": "rm -r dist",
     "watch": "webpack --watch --progress --config webpack.dev.js",
-    "build": "webpack --watch --progress --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js"
   },
   "dependencies": {
     "css-loader": "^6.7.3",
