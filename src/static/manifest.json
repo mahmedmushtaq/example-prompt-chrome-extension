@@ -15,7 +15,7 @@
   "background": {
     "service_worker": "background.js"
   },
-  "permissions": ["tabs", "bookmarks"],
+  "permissions": ["tabs", "bookmarks", "storage"],
   "content_scripts": [
     { "matches": ["https://chat.openai.com/*"], "js": ["contentScript.js"] }
   ]

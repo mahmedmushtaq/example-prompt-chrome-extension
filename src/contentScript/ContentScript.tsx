@@ -5,13 +5,24 @@ import { ICategoryData, IPromptData } from "../globals/types";
 import ChevronRight from "../shared/Svg/ChevronRight";
 import ArrowLeft from "../shared/Svg/ArrowLeft";
 import { getAllPromptsByCategoryId } from "../firebase/db/prompt";
+import { isChatGptExtensionEnabled } from "../globals/helpers";
+import { STORAGE_KEYS } from "../globals/constants";
 
 const ContentScript = () => {
   const [categories, setCategories] = useState<ICategoryData[]>([]);
   const [categoryPrompts, setCategoryPrompts] = useState<IPromptData[]>([]);
   const [closeDiv, setCloseDiv] = useState(false);
   const [loading, setLoading] = useState(false);
-  const loadCategories = useCallback(async () => {
+  const loadCategories = useCallback(async (skipGptEnableChecking = false) => {
+    if (!skipGptEnableChecking) {
+      const val = await isChatGptExtensionEnabled();
+
+      if (!val) {
+        console.log("chatgpt extension is disabled");
+        return;
+      }
+    }
+
     try {
       const categories = await getAllCategories();
       setCategories(categories);
@@ -24,12 +35,23 @@ const ContentScript = () => {
     loadCategories();
   }, [loadCategories]);
 
+  useEffect(() => {
+    const val = STORAGE_KEYS.enableChatGptExtension;
+    chrome.storage.onChanged.addListener(async (changes, namespace) => {
+      for (let [val, { oldValue, newValue }] of Object.entries(changes)) {
+        if (newValue) await loadCategories();
+        else setCategories([]);
+      }
+    });
+  }, []);
+
   const toggleDiv = () => setCloseDiv(!closeDiv);
 
   const chipMap = categoryPrompts.length ? categoryPrompts : categories;
 
   const onClickCategoryChip = async (categoryData: ICategoryData) => {
     // load all prompts according to category
+
     setLoading(true);
     try {
       const allPrompts = await getAllPromptsByCategoryId(categoryData.id);
