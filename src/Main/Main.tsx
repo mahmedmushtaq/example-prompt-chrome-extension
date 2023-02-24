@@ -23,7 +23,7 @@ const Popup = () => {
       <h2 className="text-xl text-secondary py-2 font-lexend font-bold">
         ChatGpt prompts
       </h2>
-
+      {/* 
       <label className="relative inline-flex items-center cursor-pointer">
         <input
           type="checkbox"
@@ -39,11 +39,13 @@ const Popup = () => {
         <span className="ml-3 text-sm font-medium text-gray-900 dark:text-gray-300 font-montSerrat">
           Enable
         </span>
-      </label>
+      </label> */}
 
       <p className="p-2 font-montSerrat">
-        By enabling this, you are allowing the extension to help you to write
-        ChatGpt prompts. ( refresh the page after toggling the state )
+        You can get free chatgpt prompts by visiting{" "}
+        <a href="https://www.exampleprompts.com" target="_blank">
+          www.exampleprompts.com
+        </a>
       </p>
     </div>
   );

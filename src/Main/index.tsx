@@ -9,6 +9,7 @@ function init() {
   if (!appContainer) {
     throw new Error("Can not find AppContainer");
   }
+  appContainer.classList.add("my-extension-overlay");
   const root = createRoot(appContainer);
   console.log(appContainer);
   root.render(<Main />);

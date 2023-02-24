@@ -8,7 +8,7 @@ module.exports = {
   entry: {
     main: path.resolve("./src/Main/index.tsx"),
     background: path.resolve("./src/background/index.ts"),
-    contentScript: path.resolve("./src/contentScript/index.tsx"),
+    chatGptScript: path.resolve("./src/contentScript/chatGptScript.tsx"),
     firebaseConfig: path.resolve("./src/firebase/firebaseConfig.ts"),
     categories: path.resolve("./src/firebase/db/categories.ts"),
     firebaseAbstractFile: path.resolve(
@@ -46,6 +46,7 @@ module.exports = {
         },
       ],
     }),
+
     ...getHtmlPlugins(["main"]),
   ],
   resolve: {
@@ -54,7 +55,7 @@ module.exports = {
   output: {
     filename: "[name].js",
   },
-  
+
   // optimization: {
   //   splitChunks: {
   //     // include all types of chunks

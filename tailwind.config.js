@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./src/**/*.{html,js,jsx,tsx,ts}"],
+  // prefix: ".my-extension-overlay",
   theme: {
     colors: {
       primary: "#212121cc",
